@@ -117,12 +117,15 @@ module.exports = (env, argv) => {
         },
         // Configuration for webpack-dev-server
         devServer: {
-            publicPath: "/",
-            contentBase: resolve(CONFIG.assetsDir),
-            port: CONFIG.devServerPort,
-            proxy: CONFIG.devServerProxy,
+            devMiddleware: {
+                publicPath: "/"
+            },
             hot: true,
-            inline: true
+            proxy: CONFIG.devServerProxy,
+            port: CONFIG.devServerPort,
+            static: {
+                directory: resolve(CONFIG.assetsDir)
+            }
         },
         // - babel-loader: transforms JS to old syntax (compatible with old browsers)
         // - sass-loaders: transforms SASS/SCSS into JS
